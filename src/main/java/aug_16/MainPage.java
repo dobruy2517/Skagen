@@ -11,7 +11,12 @@ public class MainPage {
     private By lastName = By.id("lastName");
     private By email = By.id("email");
     private By password = By.id("password");
+    private By product_1 = By.cssSelector(".prod-info>a[title=\"Hagen Connected Titanium and Leather Hybrid Smartwatch\"]");
     private By singMeUp = By.cssSelector(".account-register>button");
+    private By newArrivals = By.cssSelector("#global-navigation > div.navigation > div > ul > li:nth-child(1) > a");
+    private By addToBag = By.id("add-to-bag");
+    private  By headPanel = By.cssSelector("#header-panel>a");
+
     public MainPage(){
 
     }
@@ -40,11 +45,18 @@ public class MainPage {
     public void inputRegData(){
         driver.findElement(firstName).sendKeys("FirstName");
         driver.findElement(lastName).sendKeys("LastName");
-        driver.findElement(email).sendKeys("dobruy251  @gmail.com");
-        driver.findElement(password).sendKeys("password");
+        driver.findElement(email).sendKeys("test_email@i.ua");
+        driver.findElement(password).sendKeys("password8");
     }
 
     public void singMeUpButton(){
         driver.findElement(singMeUp).click();
+    }
+
+    public void byProducts(){
+        driver.findElement(newArrivals).click();
+        driver.findElement(product_1).click();
+        driver.findElement(addToBag).click();
+        driver.findElement(headPanel).click();
     }
 }
