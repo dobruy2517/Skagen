@@ -16,21 +16,28 @@ public class SkagenTest {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
-    @After
+        @After
     public void postCondition(){
         driver.close();
     }
     @Test
-    public void test(){
+    public void registerTest(){
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
         mainPage.clickLogIn();
         mainPage.clickCreateNewAcount();
         mainPage.inputRegData();
         mainPage.singMeUpButton();
-        String actualResultEmail = driver.findElement(By.id("tooltipMsg-email")).getText();
-        String actualResultPassword = driver.findElement(By.id("tooltipMsg-password")).getText();
-        Assert.assertEquals("Please enter a valid email address", actualResultEmail);
-        Assert.assertEquals("Passwords need to be at least 7 characters long and include both a number and letter to be valid. Please try again.", actualResultPassword);
+    }
+
+    @Test
+    public void byProducts(){
+        MainPage page = new MainPage(driver);
+        page.open();
+        page.byProducts();
+        String expResult_1 = driver.findElement(By.cssSelector("#mini-cart-icon>a>span")).getText();
+        Assert.assertEquals("1", expResult_1);
+        String expResult_2 = driver.findElement(By.cssSelector(".total>span:nth-child(2)")).getText();
+        Assert.assertEquals("£195.00", expResult_2);
     }
 }
