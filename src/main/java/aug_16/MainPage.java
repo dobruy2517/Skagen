@@ -2,9 +2,15 @@ package aug_16;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
+
+import static Utils.DriverUtils.getDriver;
 
 public class MainPage {
-    WebDriver driver;
     private By logIn = By.id("utility-nav-signup");
     private By createNewAcount = By.cssSelector(".account-login>p>a");
     private By firstName = By.id("firstName");
@@ -15,48 +21,54 @@ public class MainPage {
     private By singMeUp = By.cssSelector(".account-register>button");
     private By newArrivals = By.cssSelector("#global-navigation > div.navigation > div > ul > li:nth-child(1) > a");
     private By addToBag = By.id("add-to-bag");
-    private  By headPanel = By.cssSelector("#header-panel>a");
+    private By quantity = By.cssSelector("#mini-cart-icon>a>span");
+    private By continueShoping = By.cssSelector(".button-box>a.btn-secondary");
+    private By curt = By.cssSelector("#mini-cart-icon>a>i");
 
     public MainPage(){
 
     }
-
-    public MainPage(WebDriver driver){
-        this.driver = driver;
-    }
-
+    
     public void open(){
-        driver.get("http://www.skagen.com");
+        getDriver().get("http://www.skagen.com");
     }
 
     public void close(){
-        driver.quit();
+        getDriver().quit();
     }
 
     public void clickLogIn(){
-        driver.findElement(logIn).click();
+        getDriver().findElement(logIn).click();
 
     }
 
     public void clickCreateNewAcount(){
-        driver.findElement(createNewAcount).click();
+        getDriver().findElement(createNewAcount).click();
     }
 
     public void inputRegData(){
-        driver.findElement(firstName).sendKeys("FirstName");
-        driver.findElement(lastName).sendKeys("LastName");
-        driver.findElement(email).sendKeys("test_email@i.ua");
-        driver.findElement(password).sendKeys("password8");
+        getDriver().findElement(firstName).sendKeys("FirstName");
+        getDriver().findElement(lastName).sendKeys("LastName");
+        getDriver().findElement(email).sendKeys("test_email@i.ua");
+        getDriver().findElement(password).sendKeys("password8");
     }
 
     public void singMeUpButton(){
-        driver.findElement(singMeUp).click();
+        getDriver().findElement(singMeUp).click();
     }
 
     public void byProducts(){
-        driver.findElement(newArrivals).click();
-        driver.findElement(product_1).click();
-        driver.findElement(addToBag).click();
-        driver.findElement(headPanel).click();
+        getDriver().findElement(newArrivals).click();
+        getDriver().findElement(product_1).click();
+        getDriver().findElement(addToBag).click();
+//        ExplisitWait(15);
+        getDriver().findElement(continueShoping).click();
+//        getDriver().findElement(newArrivals).click();
+        getDriver().findElement(curt).click();
     }
+
+    public String getQuantity(){
+        return getDriver().findElement(quantity).getText();
+    }
+
 }

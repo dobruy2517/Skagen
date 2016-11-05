@@ -8,21 +8,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import static Utils.DriverUtils.getDriver;
+
 public class SkagenTest {
-    public WebDriver driver;
     @Before
     public void preCondition(){
-        System.setProperty("webdriver.chrome.driver", "/home/ihor/Rozetka/chromedriver");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        System.setProperty("webgetDriver().chrome.driver", "chromedriver");
+        getDriver().manage().window().maximize();
     }
         @After
     public void postCondition(){
-        driver.close();
+        getDriver().close();
     }
     @Test
     public void registerTest(){
-        MainPage mainPage = new MainPage(driver);
+        MainPage mainPage = new MainPage();
         mainPage.open();
         mainPage.clickLogIn();
         mainPage.clickCreateNewAcount();
@@ -32,12 +32,11 @@ public class SkagenTest {
 
     @Test
     public void byProducts(){
-        MainPage page = new MainPage(driver);
+        MainPage page = new MainPage();
         page.open();
         page.byProducts();
-        String expResult_1 = driver.findElement(By.cssSelector("#mini-cart-icon>a>span")).getText();
-        Assert.assertEquals("1", expResult_1);
-        String expResult_2 = driver.findElement(By.cssSelector(".total>span:nth-child(2)")).getText();
+        Assert.assertEquals("(1)", page.getQuantity());
+        String expResult_2 = getDriver().findElement(By.cssSelector(".total>span:nth-child(2)")).getText();
         Assert.assertEquals("£195.00", expResult_2);
     }
 }
